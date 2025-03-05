@@ -2,11 +2,16 @@ use std::ops::{Div, Mul};
 
 pub fn odd_fibnacci_sum(threshold: u32) -> u32 {
     let mut sum = 0;
-    for i in 0..=threshold {
-        let fib = fib(i);
+    let mut start = 0;
+    loop {
+        let fib = fib(start);
+        if fib > threshold {
+            break;
+        }
         if fib % 2 == 1 {
             sum += fib;
         }
+        start += 1;
     }
     sum
 }
