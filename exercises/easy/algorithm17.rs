@@ -19,7 +19,9 @@ pub fn intersection(nums1: Vec<i32>, nums2: Vec<i32>) -> Vec<i32> {
             result.insert(num);
         }
     }
-    result.into_iter().collect()
+    let mut result: Vec<i32> = result.into_iter().collect();
+    result.sort();
+    result
 }
 
 #[cfg(test)]

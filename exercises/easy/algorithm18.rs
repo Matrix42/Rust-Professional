@@ -17,15 +17,17 @@ pub fn merge_intervals(intervals: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
     let mut result = Vec::new();
     let mut intervals = intervals;
     intervals.sort_by(|a, b| a[0].cmp(&b[0]));
-    let mut current_interval = intervals[0].clone();
-    for i in 1..intervals.len() {
-        let interval = intervals[i].clone();
-        if interval[0] <= current_interval[1] {
-            current_interval[1] = current_interval[1].max(interval[1]);
-        } else {
-            result.push(current_interval.clone());
-            current_interval = interval;
+    let mut i = 0;
+    while i < intervals.len() {
+        let mut start = intervals[i][0];
+        let mut end = intervals[i][1];
+        let mut j = i + 1;
+        while j < intervals.len() && end >= intervals[j][0] {
+            end = end.max(intervals[j][1]);
+            j += 1;
         }
+        result.push(vec![start, end]);
+        i = j;
     }
     result
 }
