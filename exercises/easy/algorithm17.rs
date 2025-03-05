@@ -8,12 +8,18 @@
 
     Hint: You can solve this problem using sorting, hash sets, or the two-pointer technique.
 */
-
+use std::collections::HashSet;
 use std::fmt::{self, Display, Formatter};
 
 pub fn intersection(nums1: Vec<i32>, nums2: Vec<i32>) -> Vec<i32> {
-    // TODO: Implement the logic to find the intersection of two arrays
-    Vec::new() // Placeholder return value
+    let set: HashSet<i32> = HashSet::from_iter(nums1);
+    let mut result:HashSet<i32> = HashSet::new();
+    for num in nums2 {
+        if set.contains(&num) {
+            result.insert(num);
+        }
+    }
+    result.into_iter().collect()
 }
 
 #[cfg(test)]

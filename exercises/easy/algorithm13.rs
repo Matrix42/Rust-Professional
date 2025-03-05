@@ -10,12 +10,32 @@
 
     Hint: Consider normalizing the strings by removing non-alphabetical characters and converting to lowercase before checking.
 */
-
+use std::collections::HashMap;
 use std::fmt::{self, Display, Formatter};
 
 pub fn are_anagrams(s1: String, s2: String) -> bool {
-    // TODO: Implement the logic to check if two strings are anagrams
-    false // Placeholder return value
+    let mut map = HashMap::new();
+    s1.chars().for_each(|c| {
+        if c.is_alphabetic() {
+            let c = c.to_ascii_lowercase();
+            if map.contains_key(&c) {
+                let count = map.get_mut(&c).unwrap();
+                *count += 1;
+            } else {
+                map.insert(c, 1);
+            }
+        }
+    });
+    let chars = s2.chars().collect::<Vec<char>>();
+    for c in chars {
+        if c.is_alphabetic() {
+            let c = c.to_ascii_lowercase();
+            if !map.contains_key(&c) {
+                return false;
+            }
+        }
+    }
+    true
 }
 
 #[cfg(test)]

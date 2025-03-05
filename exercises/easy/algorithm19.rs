@@ -10,10 +10,11 @@
 */
 
 use std::fmt::{self, Display, Formatter};
+use std::ops::{Div, Mul};
 
 pub fn fib(n: i32) -> i32 {
-    // TODO: Implement the logic to calculate the nth Fibonacci number using matrix exponentiation
-    0 // Placeholder return value
+    1.0_f32.div(5.0_f32.sqrt()).mul((1.0_f32 + 5.0_f32.sqrt()).div(2.0_f32).powf(n as f32) - (1.0_f32 - 5.0_f32.sqrt()).div(2.0_f32).powf(n as f32))
+        .round() as i32
 }
 
 #[cfg(test)]
